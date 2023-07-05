@@ -38,7 +38,7 @@ git checkout -b dev	加上-b为创建并切换至dev分支
 			git checkout dev
 			@@@@@@@@@@@@@@@@
 git branch		查看当前分支，每个分支前会有一个*
-
+git merge xxx		合并xxx分支到当前分支
 
 
 
