@@ -52,6 +52,23 @@ git stash apply stash@{0}	恢复指定stash
 git stash drop			删除stash内容
 git stash pop			恢复stash的同时删除stash
 git cherry-pick xxx		将xxx提交的修改复制到当前分支，避免重复劳动
-
+--------------------------------------------------
+git remote			查看远程库列表
+git remote -v			查看远程库详细信息
+git push XXX xxx		将xxx分支本地内容提交到远程库XXX
+git branch --set-upstream BranchName origin/BranchName	建立本地与远程分支联系
+git pull			从远程抓取分支
+--------------------------------------------------
+标签
+--------------------------------------------------
+git tag TAG			给当前分支打上标签TAG
+git tag				查看所有标签
+git tag TAG commitID		给commitID的提交打上标签TAG
+git tag -a TAG -m "xxx" commitID打上带有说明的标签
+git show TAG			查看标签的说明
+git tag -d TAG			删除本地标签
+git push XXX TAG		推送标签TAG至远程库XXX
+git push XXX --tags		推送所有本地标签至远程库XXX
+git push XXX:refs/tags/TAG	删除远程库XXX内的标签TAG
 
 
