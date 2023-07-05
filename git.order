@@ -43,6 +43,7 @@ git branch		查看所有分支，当前分支前会有一个*
 git merge xxx		合并xxx分支到当前分支
 git branch -d xxx	删除xxx分支
 git log --graph		查看分支合并图
+git merge --no--ff xxx	禁用Fast Forward模式，使用普通模式合并
 
 
 
