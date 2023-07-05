@@ -14,7 +14,20 @@ git log             查看文件修改日日志，文件增删改察情况
 git rflog           查看命令历史，以确定要回到未来哪个版本
 --------------------------------------------------
 git diff HEAD -- xxx查看工作区和版本库最新版本区别，xxx为文件名
-git checkout -- xxx 撤销工作区内的修改，若xxx已在缓存区内，则回到添加时的状态
-
+git checkout -- xxx 撤销工作区内的修改，无论是修改还是删除都能撤销
+git reset HEAD xxx  撤销添加入暂存区的修改，回到提交前状态
+git rm              从版本库删除文件
+--------------------------------------------------
+远程仓库
+--------------------------------------------------
+ssh-keygen -t rsa -C "xxxx@email"	创建SSH Key
+git remote add origin git@github.com:username/libraryname.git
+@关联远程库与本地库
+@origin为远程库名，可修改
+@username为github用户名，libraryname为仓库名
+git push -u origin master		推送本地库至远程库
+					-u用于第一次链接，之后推送可去掉
+git clone git@github.com:username/libraryname.git
+					克隆远程库
 
 
