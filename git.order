@@ -51,6 +51,7 @@ git stash apply			恢复stash内容
 git stash apply stash@{0}	恢复指定stash
 git stash drop			删除stash内容
 git stash pop			恢复stash的同时删除stash
+git cherry-pick xxx		将xxx提交的修改复制到当前分支，避免重复劳动
 
 
 
