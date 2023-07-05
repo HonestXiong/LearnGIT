@@ -44,7 +44,13 @@ git merge xxx		合并xxx分支到当前分支
 git branch -d xxx	删除xxx分支
 git log --graph		查看分支合并图
 git merge --no--ff xxx	禁用Fast Forward模式，使用普通模式合并
-
+--------------------------------------------------
+git stash			暂存工作现场以便切换分支
+git stash list			查看stash列表
+git stash apply			恢复stash内容
+git stash apply stash@{0}	恢复指定stash
+git stash drop			删除stash内容
+git stash pop			恢复stash的同时删除stash
 
 
 
