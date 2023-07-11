@@ -1,0 +1,37 @@
+makefile语法
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+taegets : prerequisites
+	command
+	...
+或者--------------------------------------------------
+targets : prerequisites : command
+	command
+	---
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+使用变量，例如：
+原本命令：
+objects = main.o command.o
+	cc -o edit main.o command.o
+
+main.o : main.c main.h
+	cc -c main.c
+command.o : command.c command.h
+	cc -c command.c
+使用变量:
+objects = main.o command.o
+
+edit : $(objects)
+	cc -o edit $(objects)
+
+main.o : main.c main.h
+        cc -c main.c
+command.o : command.c command.h
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+makefile可以自动推导文件以及文件依赖关系后面的命令，只要它看到一个.o文件，它就会自动把.c文件加到依赖关系中。比如makefile找到一个whatever.o，那么whatever就会是whatever.o的依赖文件，并且cc -c whatever.c也会被推导出来。
+objects = main.o command.o
+
+edit : $(objects)
+	cc -o edit $(objects)
+
+main.o : main.h
+command.o : command.h
