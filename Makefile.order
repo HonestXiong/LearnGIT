@@ -35,3 +35,48 @@ edit : $(objects)
 
 main.o : main.h
 command.o : command.h
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+.PHONY : clean
+clean :
+	-rm Hello $(objects)
+.PHONY表示clean是一个伪目标，在rm前面加一个减号-，意思是不管是否有问题出现，都要继续clean
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#为注释符号，若要使用#本身，需要使用转义字符\，即\#
+\也可以作为换行符
+可以用别的文件名书写makefile，比如Make.Linux。如果要指定makefile，可以用-f参数，如make -f Make.Linux
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+include <filenames>		包含其他的makefile文件，include前面不可有tab
+VPATH = src:include:lib		VPATH使makefile在当前目录找不到源文件情况下去指定				目录中找，目录之间用冒号:分隔开
+另一个设置文件搜索路径的方法是使用vpath关键字，可以指定不同文件在不同目录中
+vpath pattern directories
+	为符合模式pattern的文件指定目录directories
+vpath pattern
+	清除符合模式pattern的文件目录
+vpath
+	清楚所有已经设置好了的文件搜索目录
+vpath使用时，pattern需要包含%，如%.h表示所有以.h结尾的文件
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+.PHONY		显式生命一个目标是伪目标。
+.PHONY : clean	只要有这个声明，不管是否有“clean”这个文件，要运行目标“clean”，只		能make clean。
+伪目标同样可以作为目标，一个用法是，使用为目标一次生成若干个可执行文件：
+.PHONY : all
+all : prog1 prog2
+
+prog1 : prog1.o
+	cc -o prog1 prog1.o
+prog2 : prog2.o
+	cc -o prog2 prog2.o
+-------------------------------------------------------
+伪目标也可以成为依赖：
+.PHONY : cleanall cleanobj cleandiff
+
+cleanall : cleanobj clean diff
+	rm program
+
+cleanobj :
+	rm *.o
+
+cleandiff :
+	rm *.diff
+
+make cleanall将清楚所有要被清除的文件。cleanobj和cleandiff这两个为目标有点像子程序，可以使用make cleanall和make cleanobj和make cleandiff命令来达到清楚不同种类文件的目的
