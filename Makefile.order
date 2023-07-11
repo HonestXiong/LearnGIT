@@ -82,3 +82,62 @@ cleandiff :
 	rm *.diff
 
 make cleanall将清楚所有要被清除的文件。cleanobj和cleandiff这两个为目标有点像子程序，可以使用make cleanall和make cleanobj和make cleandiff命令来达到清楚不同种类文件的目的
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+自动生成依赖
+--------------------------------------------------------
+gcc -M main.c		其输出是：
+main.o : main.c main.h
+有些情况下-M得换成-MM，都则-M会将一些标准库的头文件也包含进来
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+@		用在命令前可以隐藏其在make时的显示
+
+:		要让上一条命令的结果应用在下一条命令，则要用分号:隔开这两条命令：
+exec :
+	cd /home/dev
+	pwd
+	只会打印出当前目录
+
+exec : 
+	cd /home/dev:pwd
+	会打印出切换到/home/dev之后的目录
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+嵌套执行make
+--------------------------------------------------------
+subsystem :
+	cd ./HelloWorld && $(MAKE)
+
+等价于
+
+subsystem :
+	$(MAKE) -C ./HelloWorld
+
+先进入./HelloWorld目录再执行make指令
+--------------------------------------------------------
+export variable		将变量variable转递至下级makefile中
+unexport variable	不将变量variable传递至下级makefile中
+
+export variable = value
+等价于
+variable = value
+export variable
+等价于
+export variable := value
+等价于
+variable := value
+export variable
+
+export variable += value
+等价于
+variable += value
+export variable
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+定义命令包
+--------------------------------------------------------
+如果makefile中出现一些相同命令序列，那么可以为他们定义一个变量。
+define run-yacc
+yacc $(firstword $^)
+mv y.tab.c $@
+endef
+“run-yacc”是这个命令包的名字，define和endef之中的两行就是命令序列。第一行命令是运行yacc程序，第二行命令是把这个文件改名。要使用命令包，就要像使用变量一样：
+$(run-yacc)
+
