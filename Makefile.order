@@ -195,3 +195,28 @@ ifndef <variable-name>	如果不为空，则为真
 使用函数
 ------------------------------------
 $(<function> <arguments>)	调用函数,function为函数名，arguments为参数，参数之间以逗号分隔，函数名和参数之间以空格分隔。
+------------------------------------
+$(subst <AA>,<BB>,<CC>)		把字符串CC中的AA字符替换成BB
+------------------------------------
+$(patsubst <pattern>,<replacement>,<text>)	查找<text>中的单词是否符合模式<pattern>，如果匹配，则以<replacement>替换。例：
+$(patsubst %.c,%.o,x.c.c bar.c)	将字符串x.c.c bar.c符合模式%.c的单词替换成%.o，返回结果是x.c.o bar.o
+------------------------------------
+$(strip <string>)	取出开头和结尾的空格，并将中间空格缩短到一个空格，例:
+$(strip <    a    b c  >)	结果为a b c
+------------------------------------
+$(findstring <find>,<in>)	在字符串<in>中寻找<find>字符串，如果找到，返回<find>，否则返回空字符
+------------------------------------
+$(filter <pattern...>,<text>)	以<pattern>模式过滤<text>字符串中的单词，保留符合<pattern>模式的单词，可以有多个模式，例:
+source := foo.c bar.c baz.s ugh.h
+foo : $(source)
+	gcc $(filter %.c %.s,$(source)) -o -foo
+$(filter %.c %.s,$(source))返回的值是foo.c bar.c baz.s
+
+filter-out作用相反
+------------------------------------
+$(sort <list>)		 给<list>中的单词排序，并且除去相同的单词
+------------------------------------
+$(word N，text)		返回字符串TEXT中的第N个单词，如果N的值大于字符串中单词的个数，返回空；如果N为0，则出错
+------------------------------------
+$(wordlist <ss>,<e>,<text>)	从字符串<text>中取从<ss>到<e>的字符串，<ss>和<e>是一个数字
+
