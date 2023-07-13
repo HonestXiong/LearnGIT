@@ -56,4 +56,16 @@ Hello,My name is "Honest"
 双引号的优点：
 	双引号里可以有变量
 	双引号里可以出现转义字符
+-------------------------
+获取字符串长度,例如:
 
+string="abcd"
+ehco $(#string)		#输出4,变量为字符串时，$(#string)等价于${#string[0]}
+-------------------------
+提取子字符串，例如:
+string="runoob is a great site"
+echo ${string:1:4}	#输出unoo
+-------------------------
+查找子字符串，例如:
+string:"runoob is a great site"
+echo `expr index "$string" io`	#输出4
