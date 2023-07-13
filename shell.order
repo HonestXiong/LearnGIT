@@ -1,4 +1,19 @@
 #! /bin/bash		#!是一个约定标记，告诉系统这个脚本用司马解释其执行
+------------------------
+#开头的行就是注释
+
+多行注释
+:<<EOF
+xxxxx
+xxxxx
+xxxxx
+EOF
+或者EOF也可以用其他符号代替
+:<<!
+xxxxx
+xxxxx
+xxxxx
+!
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 shell变量
 -------------------------
@@ -60,12 +75,29 @@ Hello,My name is "Honest"
 获取字符串长度,例如:
 
 string="abcd"
-ehco $(#string)		#输出4,变量为字符串时，$(#string)等价于${#string[0]}
+ehco $(#string)		输出4,变量为字符串时，$(#string)等价于${#string[0]}
 -------------------------
 提取子字符串，例如:
+从字符串第2个字符开始截取4个字符
 string="runoob is a great site"
-echo ${string:1:4}	#输出unoo
+echo ${string:1:4}	输出unoo
 -------------------------
 查找子字符串，例如:
+查找字符i或o的位置(那个字符先出现就计算哪个)
 string:"runoob is a great site"
-echo `expr index "$string" io`	#输出4
+echo `expr index "$string" io`	#输出4，`为反引号，tab上面一个键位
+-------------------------
+bash指出一维数组，不支持多维数组，并且没有限定数组的大小
+
+数组定义形式为：
+array=(value0 value1 value2)	数组元素用空格分隔开，也可以不是用连续的下标
+
+读取数组元素的一般格式是：
+${array[n]}		当n为@时，可以获取数组中所有元素
+-------------------------
+获取数组长度，与获取字符串长度方法相同
+lenght=${#array[@]}
+或者
+langht=${#array[*]}
+或者
+lenght=$#array{[n]}
