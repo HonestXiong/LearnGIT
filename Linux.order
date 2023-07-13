@@ -1,0 +1,7 @@
+top		查看实时进程
+kill id		结束进程id
+----------------------------------
+fdisk -l	显示磁盘分区
+mount Udisk direc	将Udisk U盘挂载至direc
+umount Udisk direc	取消挂载
+
